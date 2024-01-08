@@ -2,6 +2,9 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'dart:developer';
+import '../models/car.dart' as car;
+import '../models/car.dart';
+
 
 class Apiservice {
 
@@ -20,7 +23,7 @@ class Apiservice {
           return jsonData["id_token"];
         }
         if(response.statusCode == 401) {
-          return("password or username incorect");
+          return("password or username incorrect");
         }
         return("error something went wrong");
     }
@@ -29,4 +32,17 @@ class Apiservice {
     }
   }
 
+  Future<dynamic> getCars() async {
+    final response = await http.get(Uri.parse("$BaseUrl/api/cars"));
+    List<car.Car>  cars = [];
+
+    if(response.statusCode == 200 ){
+    final json = jsonDecode(response.body);
+    for(var car in json) {
+       Car newCar = Car(car);
+       cars.add(newCar);
+    }
+    return cars;
+    }
+  }
 }
