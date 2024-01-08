@@ -1,4 +1,8 @@
+import 'package:car_rental/screens/car_details_screen.dart';
 import 'package:flutter/material.dart';
+
+
+
 
 class Car {
   final String brand;
@@ -85,17 +89,27 @@ class HomeScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: cars.map((car) {
-              return Card(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
-                child: ListTile(
-                  leading: Image.asset(
-                    car.imageUrl,
-                    width: imageHeight,
-                    height: imageHeight,
-                    fit: BoxFit.cover,
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CarDetailsScreen(),
+                    ),
+                  );
+                },
+                child: Card(
+                  margin: EdgeInsets.symmetric(vertical: 10.0),
+                  child: ListTile(
+                    leading: Image.asset(
+                      car.imageUrl,
+                      width: imageHeight,
+                      height: imageHeight,
+                      fit: BoxFit.cover,
+                    ),
+                    title: Text(car.brand),
+                    subtitle: Text('\$${car.price.toStringAsFixed(2)}'),
                   ),
-                  title: Text(car.brand),
-                  subtitle: Text('\$${car.price.toStringAsFixed(2)}'),
                 ),
               );
             }).toList(),
