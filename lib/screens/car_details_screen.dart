@@ -1,3 +1,4 @@
+import 'package:car_rental/screens/booking_screen.dart';
 import 'package:flutter/material.dart';
 
 class CarDetailsScreen extends StatelessWidget {
@@ -65,7 +66,12 @@ class CarDetailsScreen extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  // Implement booking logic here
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BookingScreen(),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.orange, // Change the button color here
